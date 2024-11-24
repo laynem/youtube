@@ -18,7 +18,8 @@
     </form>
     <p id="status"></p>
 
-    <script>
+    <!-- JavaScript Code -->
+    <script type="module">
       // Firebase configuration (replace these with your actual Firebase project settings)
       const firebaseConfig = {
         apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
@@ -29,11 +30,11 @@
         appId: "1:975424791293:web:51703a22f18a8845c91494",
       };
 
-      // Initialize Firebase (modular way)
+      // Import Firebase modules
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
       import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
       
-      // Initialize Firebase app
+      // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
