@@ -11,7 +11,7 @@
   </head>
   <body>
     <h1>Save Text to Firebase</h1>
-    <span>Version 0.0002</span>
+    <span>Version 0.0003</span>
     <form id="textForm">
       <label for="textInput">Enter Text:</label><br />
       <input type="text" id="textInput" name="textInput" required /><br /><br />
@@ -24,7 +24,8 @@
         // Import the functions you need from the SDKs you need
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, enableLogging } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        setLogLevel('debug');
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
         // Your web app's Firebase configuration
@@ -41,8 +42,6 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);   
-
-      enableLogging(true);
 
       // Form submission handler
       const form = document.getElementById("textForm");
