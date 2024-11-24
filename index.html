@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Save to Firebase</title>
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (modular version) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
@@ -29,9 +29,13 @@
         appId: "1:975424791293:web:51703a22f18a8845c91494",
       };
 
-      // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
+      // Initialize Firebase (modular way)
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+      
+      // Initialize Firebase app
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
       // Form submission handler
       const form = document.getElementById("textForm");
@@ -43,9 +47,7 @@
 
         try {
           // Save data to Firestore
-          await db
-            .collection("texts")
-            .add({ text: textInput, timestamp: new Date() });
+          await addDoc(collection(db, "texts"), { text: textInput, timestamp: new Date() });
           status.textContent = "Text saved successfully!";
           form.reset();
         } catch (error) {
