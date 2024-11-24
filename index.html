@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Youtube Omega</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
   </head>
   <body>
     <h1>Save Text to Firebase</h1>
-    <span>Version 0.0007</span>
+    <span>Version 0.0008</span>
     <form id="textForm">
       <label for="textInput">Enter Text:</label><br />
       <input type="text" id="textInput" name="textInput" required /><br /><br />
@@ -206,6 +206,23 @@
         </div>
       </form>
     <p id="status"></p>
+
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+        module.exports = {
+            plugins: [
+                require('@tailwindcss/forms'),
+            ],
+        }
+      </script>
 
     <!-- JavaScript Code -->
     <script type="module">
