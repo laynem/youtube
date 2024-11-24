@@ -53,7 +53,7 @@
 
         try {
           // Save data to Firestore
-          await setDoc(doc(db, "texts"), {
+          await setDoc(doc(db, "texts", "timestamps"), {
             text: textInput,
             timestamp: new Date()
             });
