@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Project Youtube Omega</title>
+        <title>Youtube Studio Assistant</title>
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
         <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
@@ -12,13 +12,7 @@
 	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style>
-            .material-icons {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
+        <link href="style.css" rel="stylesheet">
     </head>
     <body>
         <div class="min-h-full flex flex-col h-screen justify-between">
@@ -302,160 +296,6 @@
             </footer>
         </div>
         <script type="module" src="auth.js"></script>
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-            import { getDatabase, ref, get, set, remove, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-            import { getFirestore, setLogLevel, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-            // Firebase configs
-            const firebaseConfig = {
-                apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
-                authDomain: "fir-b6113.firebaseapp.com",
-                databaseURL: "https://fir-b6113-default-rtdb.firebaseio.com",
-                projectId: "fir-b6113",
-                storageBucket: "fir-b6113.firebasestorage.app",
-                messagingSenderId: "975424791293",
-                appId: "1:975424791293:web:51703a22f18a8845c91494",
-            };
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const database = getDatabase();
-            
-            // Set notification alert
-            function setAlert( type, msg ) {
-                switch (type) {
-                    case "error":
-                        $("#alert").addClass("bg-red-100 border border-red-400 text-red-700");
-                        $("#alert strong").html("Error!");
-                        $("#alert span.block").html(msg);
-                        break;
-                    default:
-                        $("#alert").addClass("bg-green-100 border border-green-400 text-green-700");
-                        $("#alert strong").html("Success!");
-                        $("#alert span.block").html(msg);
-                }
-                $("#alert").removeClass("hidden");
-            }
-            
-            // Convert a string to an integer hash
-            function stringToIntHash( str ) {
-                let hash = 0;
-                if (str.length === 0) return hash;
-                for (let i = 0; i < str.length; i++) {
-                    const char = str.charCodeAt(i); // Get the Unicode value of the character
-                    hash = (hash << 5) - hash + char; // Bitwise operations: hash * 31 + char
-                    hash |= 0; // Convert to 32-bit integer
-                }
-                return Math.abs(hash);
-            }
-
-            // Load list
-            function loadList( db, path, list ) {
-                const dbRef = ref(db, path);
-                $( "ul#list" + list ).html("");
-                get(dbRef)
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    // Loop through the values
-                    Object.entries(data).forEach(([key, value]) => {
-                        var mapid = key;
-                        Object.entries(value).forEach(([key, value]) => {
-                            if(key == "name") {
-                                $( "li#template"+ list +" span" ).attr( "data-id", mapid );
-                                $( "li#template"+ list +" p#list"+ list +"Name" ).html(value);
-                                $( "li#template"+ list ).clone().appendTo( "ul#list" + list ).removeClass( "hidden" ).removeAttr('id');
-                            }
-                        });
-                    });
-                    } else {
-                    console.log("No data available");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
-                });
-            }
-            
-            // Form insert submission handler
-            function insertList( db, form, path, list, input ) {
-                const inputValue = document.getElementById(input).value;
-                var id = stringToIntHash(inputValue);
-                try {
-                    // Save data to Firestore
-                    set(ref(db, path + id), {
-                        name: inputValue,
-                        timestamp: Date.now(),
-                    });
-                } catch (error) {
-                    setAlert( "error", "Error saving text: " + error.message );
-                }
-                setAlert( "success", "Text saved successfully!" );
-                form.reset();
-                loadList( db, path, list );
-            }
-
-            function insertList2( db, path, input, type ) {
-                console.log("Insert Two");
-                const inputValue = document.getElementById(input).value;
-                const inputType = document.getElementById(type).value;
-                var id = stringToIntHash(inputValue);
-                console.log(id, inputValue, inputType);
-                try {
-                    // Save data to Firestore
-                    set(ref(db, path + id), {
-                        name: inputValue,
-                        type: inputType,
-                        timestamp: Date.now(),
-                    });
-                } catch (error) {
-                    setAlert( "error", "Error saving text: " + error.message );
-                }
-                setAlert( "success", "Text saved successfully!" );
-                form.reset();
-                loadList( db, path );
-            }
-
-            // Delete button handler
-            $(document).on("click", ".listDelete", function () { 
-                // Retrieve the data-path attribute from the clicked button
-                const id = $(this).attr("data-id");
-                const path = $(this).attr("data-path");
-
-                // Reference the Firebase node
-                const dbRef = ref(database, path + id);
-
-                // Delete the data
-                remove(dbRef)
-                .then(() => {
-                    setAlert( "success", "Data at deleted successfully!" );
-                })
-                .catch((error) => {
-                    setAlert( "error", error );
-                });
-
-                loadList(database);
-            });
-
-            // MAPS
-            // Form submission handler for map
-            const formMap = document.getElementById("formMap");
-            formMap.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                insertList( database , formMap, "maps/", "Map", "mapName" ); 
-            });
-
-            loadList( database , "maps/", "Map" );
-
-            // HERO
-            // Form submission handler for hero
-            const formHero = document.getElementById("formHero");
-            formHero.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                insertList2( database , "hero/", "heroName", "heroType" ); 
-            });
-
-            loadList( database , "hero/", "Hero" );
-        </script>
+        <script type="module" src="settings.js"></script>
     </body>
 </html>
