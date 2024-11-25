@@ -137,7 +137,7 @@ function insertListHero( db, form, path, input, type ) {
     }
     setAlert( "success", "Text saved successfully!" );
     form.reset();
-    loadList( db, path );
+    loadListHero( db, path );
 }
 
 // Delete button handler
