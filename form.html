@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Youtube Omega</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    </head>
+    <body>
+        <div class="min-h-full flex flex-col h-screen justify-between">
+            <nav class="bg-gray-800">
+                <div class="mx-auto sm:px-6 lg:px-8">
+                    <div class="flex h-16 items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="shrink-0">
+                                <img src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_v2_darkmode.svg">
+                            </div>
+                            <div class="ml-10 flex items-baseline space-x-4">
+                                <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
+                                <a href="form.html" class="font-bold px-3 py-2 text-sm text-white" aria-current="page">Form</a>
+                                <a href="schedule.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Schedule</a>
+                                <a href="statistics.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Statistics</a>
+                                <a href="settings.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Settings</a>
+                            </div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-4 flex items-center md:ml-6">
+                                <div class="relative ml-3">
+                                    <div>
+                                        <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                            <a href="#" class="rounded-md px-3 py-2 text-md font-bold text-white">SEASON 13</a>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="relative ml-3">
+                                    <div>
+                                        <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                            <img class="size-8 rounded-full" src="https://yt3.ggpht.com/hld3dTfVV93aglTljqRhQUxyHd6QUCHpRxXLFMhxcUMfuGMm7-mJMegmRCuILdTxEbJcEFmWew=s108-c-k-c0x00ffffff-no-rj" alt="">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <header class="bg-white shadow">
+                <div class="mx-auto py-6 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Form</h1>
+                </div>
+            </header>
+            <main class="mb-auto">
+                <div class="mx-auto py-6 sm:px-6 lg:px-8">
+                    <form>
+                        <div class="pb-10 border-b border-gray-900/10">
+                            <div class="grid grid-cols-12 gap-x-6 gap-y-8">
+                                <div class="col-span-2">
+                                    <label for="first-name" class="block text-sm/6 font-bold text-gray-900">Video Title</label>
+                                    <div class="mt-1">
+                                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                    </div>
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="hero" class="block text-sm/6 font-bold text-gray-900">Hero</label>
+                                    <div class="mt-1">
+                                        <select id="hero" name="hero" autocomplete="hero-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                            <option>United States</option>
+                                            <option>Canada</option>
+                                            <option>Mexico</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="map" class="block text-sm/6 font-bold text-gray-900">Map</label>
+                                    <div class="mt-1">
+                                        <select id="map" name="map" autocomplete="map-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                            <option>United States</option>
+                                            <option>Canada</option>
+                                            <option>Mexico</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="mode" class="block text-sm/6 font-bold text-gray-900">Mode</label>
+                                    <div class="mt-1">
+                                        <select id="mode" name="mode" autocomplete="mode-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                            <option>Quick Play</option>
+                                            <option>Competitive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="featuring" class="block text-sm/6 font-bold text-gray-900">Featuring</label>
+                                    <div class="mt-1">
+                                        <input type="text" name="featuring" id="featuring" autocomplete="featuring" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                    </div>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="date" class="block text-sm/6 font-bold text-gray-900">Date</label>
+                                    <div class="mt-1">
+                                        <div class="relative max-w-sm">
+                                            <input datepicker id="default-datepicker" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" placeholder="Select date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="code" class="block text-sm/6 font-bold text-gray-900">Code</label>
+                                    <div class="mt-1">
+                                        <input type="text" name="code" id="code" autocomplete="code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-end gap-x-6">
+                            <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+                            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+            <footer class="bg-white rounded-lg m-4">
+                <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+                    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 Youtube Studio. All Rights Reserved.</span>
+                </div>
+            </footer>
+        </div>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+            import {
+                getDatabase,
+                ref,
+                set,
+            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+            import {
+                getFirestore,
+                setLogLevel,
+            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+            setLogLevel("debug");
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
+                authDomain: "fir-b6113.firebaseapp.com",
+                databaseURL: "https://fir-b6113-default-rtdb.firebaseio.com",
+                projectId: "fir-b6113",
+                storageBucket: "fir-b6113.firebasestorage.app",
+                messagingSenderId: "975424791293",
+                appId: "1:975424791293:web:51703a22f18a8845c91494",
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            // const db = getFirestore(app);
+            const database = getDatabase();
+
+            // Form submission handler
+            const form = document.getElementById("textForm");
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const textInput = document.getElementById("textInput").value;
+                const status = document.getElementById("status");
+
+                try {
+                // Save data to Firestore
+                set(ref(database, "users/" + 1), {
+                    username: textInput,
+                    email: textInput,
+                    profile_picture: textInput,
+                });
+
+                status.textContent = "Text saved successfully!";
+                form.reset();
+                } catch (error) {
+                status.textContent = "Error saving text: " + error.message;
+                }
+            });
+        </script>
+    </body>
+</html>

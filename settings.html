@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Youtube Omega</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            .material-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+        </style>
+    </head>
+    <body>
+        <div class="min-h-full flex flex-col h-screen justify-between">
+            <nav class="bg-gray-800">
+                <div class="mx-auto sm:px-6 lg:px-8">
+                    <div class="flex h-16 items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="shrink-0">
+                                <img src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_v2_darkmode.svg">
+                            </div>
+                            <div class="ml-10 flex items-baseline space-x-4">
+                                <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
+                                <a href="form.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Form</a>
+                                <a href="schedule.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Schedule</a>
+                                <a href="statistics.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Statistics</a>
+                                <a href="settings.html" class="font-bold px-3 py-2 text-sm text-white" aria-current="page">Settings</a>
+                            </div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-4 flex items-center md:ml-6">
+                                <div class="relative ml-3">
+                                    <div>
+                                        <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                            <a href="#" class="rounded-md px-3 py-2 text-md font-bold text-white">SEASON 13</a>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="relative ml-3">
+                                    <div>
+                                        <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                            <img class="size-8 rounded-full" src="https://yt3.ggpht.com/hld3dTfVV93aglTljqRhQUxyHd6QUCHpRxXLFMhxcUMfuGMm7-mJMegmRCuILdTxEbJcEFmWew=s108-c-k-c0x00ffffff-no-rj" alt="">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <header class="bg-white shadow">
+                <div class="mx-auto py-6 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Settings</h1>
+                </div>
+            </header>
+            <main class="mb-auto">
+                <div class="mx-auto py-6 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-5 gap-6">
+                        <div>
+                            <form id="formMap">
+                                <div class="p-4 border border-gray-200 rounded-lg shadow">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12">
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Map</label>
+                                            <div class="grid grid-cols-3 gap-4 mt-1">
+                                                <input type="text" name="mapName" id="mapName" placeholder="Map Name" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Map</button>                                           
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>           
+                            </form>
+                            <hr />
+                            <ul role="list" class="divide-y divide-gray-100 p-2">
+                                <li class="flex justify-between gap-x-2 py-2">
+                                  <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                      <p class="text-sm/6 font-bold text-slate-900">Samoa</p>
+                                    </div>
+                                  </div>
+                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                  </div>
+                                </li>
+                                <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Havana</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                  </li>
+                                  <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Suravasa</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="p-4 border border-gray-200 rounded-lg shadow">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12">
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Hero</label>
+                                            <div class="grid grid-cols-3 gap-4 mt-1">
+                                                <input type="text" name="hero" id="hero" placeholder="Hero Name" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <select id="mode" name="mode" autocomplete="type" placeholder="Hero Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                                    <option>Tank</option>
+                                                    <option>DPS</option>
+                                                    <option>Support</option>
+                                                </select>
+                                                <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Hero</button>                                           
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>           
+                            </form>
+                            <hr />
+                            <ul role="list" class="divide-y divide-gray-100 p-2">
+                                <li class="flex justify-between gap-x-2 py-2">
+                                  <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                      <p class="text-sm/6 font-bold text-slate-900">Juno</p>
+                                    </div>
+                                  </div>
+                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex">Support <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                  </div>
+                                </li>
+                                <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Ana</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">Support <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                  </li>
+                                  <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Winston</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">Tank <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="p-4 border border-gray-200 rounded-lg shadow">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12">
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Players</label>
+                                            <div class="grid grid-cols-3 gap-4 mt-1">
+                                                <input type="text" name="player" id="player" placeholder="Player Name" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Player</button>                                           
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>           
+                            </form>
+                            <hr />
+                            <ul role="list" class="divide-y divide-gray-100 p-2">
+                                <li class="flex justify-between gap-x-2 py-2">
+                                  <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                      <p class="text-sm/6 font-bold text-slate-900">Abuton</p>
+                                    </div>
+                                  </div>
+                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                  </div>
+                                </li>
+                                <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Thatlilqt</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                  </li>
+                                  <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Megasara</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="p-4 border border-gray-200 rounded-lg shadow">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12">
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Tags</label>
+                                            <div class="grid grid-cols-3 gap-4 mt-1">
+                                                <input type="text" name="tag" id="tag" placeholder="Tag" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Player</button>                                           
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>           
+                            </form>
+                            <hr />
+                            <ul role="list" class="divide-y divide-gray-100 p-2">
+                                <li class="flex justify-between gap-x-2 py-2">
+                                  <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                      <p class="text-sm/6 font-bold text-slate-900">Overwatch</p>
+                                    </div>
+                                  </div>
+                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                  </div>
+                                </li>
+                                <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">No Commentary</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                  </li>
+                                  <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Overwatch 2</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="p-4 border border-gray-200 rounded-lg shadow">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12">
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Settings</label>
+                                            <div class="grid grid-cols-3 gap-4 mt-1">
+                                                <input type="text" name="hero" id="hero" placeholder="Setting" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <select id="mode" name="mode" autocomplete="type" placeholder="Setting Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                                    <option>Season</option>
+                                                    <option>Start Date</option>
+                                                    <option>End Date</option>
+                                                </select>
+                                                <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>                                           
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>           
+                            </form>
+                            <hr />
+                            <ul role="list" class="divide-y divide-gray-100 p-2">
+                                <li class="flex justify-between gap-x-2 py-2">
+                                  <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                      <p class="text-sm/6 font-bold text-slate-900">Season</p>
+                                    </div>
+                                  </div>
+                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex">13 <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                  </div>
+                                </li>
+                                <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">Start Date</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">11/4/2024 <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                  </li>
+                                  <li class="flex justify-between gap-x-2 py-2">
+                                    <div class="flex min-w-0 gap-x-4">
+                                      <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900">End Date</p>
+                                      </div>
+                                    </div>
+                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                        <p class="text-sm/6 text-gray-900 flex">1/4/2025 <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+            <footer class="bg-white rounded-lg m-4">
+                <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+                    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 Youtube Studio. All Rights Reserved.</span>
+                </div>
+            </footer>
+        </div>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+            import {
+                getDatabase,
+                ref,
+                set,
+            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+            import {
+                getFirestore,
+                setLogLevel,
+            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+            setLogLevel("debug");
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
+                authDomain: "fir-b6113.firebaseapp.com",
+                databaseURL: "https://fir-b6113-default-rtdb.firebaseio.com",
+                projectId: "fir-b6113",
+                storageBucket: "fir-b6113.firebasestorage.app",
+                messagingSenderId: "975424791293",
+                appId: "1:975424791293:web:51703a22f18a8845c91494",
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            // const db = getFirestore(app);
+            const database = getDatabase();
+
+            // Form submission handler
+            const form = document.getElementById("formMap");
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const mapName = document.getElementById("mapName").value;
+
+                try {
+                // Save data to Firestore
+                set(ref(database, "maps/"), {
+                    name: mapName,
+                    timestamp: Date.now(),
+                });
+
+                status.textContent = "Text saved successfully!";
+                form.reset();
+                } catch (error) {
+                status.textContent = "Error saving text: " + error.message;
+                }
+            });
+        </script>
+    </body>
+</html>
