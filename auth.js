@@ -35,7 +35,7 @@ onAuthStateChanged(auth, (user) => {
         const userName = user.displayName;
         document.getElementById("userName").innerHTML = userName;
     } else {
-        window.location.href("index.html");
+        window.location.href = "index.html";
     }   
 })
 const googleLogout = document.getElementById('googleLogout');
@@ -45,7 +45,7 @@ googleLogout.addEventListener("click", function(e) {
         signOut(auth).then(() => {
         // Sign-out successful.
         console.log("User signed out successfully");
-        window.location.href("index.html");
+        window.location.href = "index.html";
     }).catch((error) => {
         // An error happened.
         console.error("Error signing out:", error);
