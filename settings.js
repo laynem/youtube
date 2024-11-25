@@ -185,7 +185,7 @@ loadListHero( database , "hero/" );
 const formPlayer = document.getElementById("formPlayer");
 formPlayer.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertList( database , formPlayer, "player/", "playerName" ); 
+    insertList( database , formPlayer, "player/", "Player","playerName" ); 
 });
 
 loadList( database , "player/", "Player" );
