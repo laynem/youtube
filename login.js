@@ -1,3 +1,4 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { 
     getAuth, 
     signInWithPopup,
@@ -30,7 +31,8 @@ onAuthStateChanged(auth, (user) => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        return uid;
+        const userName = user.displayName;
+        document.getElementById("userName").innerHTML = userName;
     } else {
         window.location.href("index.html");
     }   
