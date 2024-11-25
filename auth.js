@@ -40,6 +40,7 @@ onAuthStateChanged(auth, (user) => {
 })
 const googleLogout = document.getElementById('googleLogout');
 googleLogout.addEventListener("click", function() {
+    console.log("Logging out");
     signOut(auth).then(() => {
     // Sign-out successful.
     console.log("User signed out successfully");
