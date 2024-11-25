@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { 
     getAuth, 
-    signInWithPopup,
     GoogleAuthProvider,
     onAuthStateChanged,
     signOut,
@@ -23,8 +22,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
