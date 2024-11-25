@@ -119,7 +119,7 @@ function insertList( db, form, path, list, input ) {
     loadList( db, path, list );
 }
 
-function insertList2( db, path, input, type ) {
+function insertListHero( db, path, input, type ) {
     console.log("Insert Two");
     const inputValue = document.getElementById(input).value;
     const inputType = document.getElementById(type).value;
@@ -176,7 +176,7 @@ loadList( database , "maps/", "Map" );
 const formHero = document.getElementById("formHero");
 formHero.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertList2( database , "hero/", "heroName", "heroType" ); 
+    insertListHero( database , "hero/", "heroName", "heroType" ); 
 });
 
-loadList2( database , "hero/" );
+loadListHero( database , "hero/" );
