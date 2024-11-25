@@ -72,6 +72,35 @@ function loadList( db, path, list ) {
     });
 }
 
+// Load list Hero
+function loadListHero( db, path ) {
+    const dbRef = ref(db, path);
+    $( "ul#listHero" ).html("");
+    get(dbRef)
+    .then((snapshot) => {
+        if (snapshot.exists()) {
+        const data = snapshot.val();
+        // Loop through the values
+        Object.entries(data).forEach(([key, value]) => {
+            var mapid = key;
+            Object.entries(value).forEach(([key, value]) => {
+                if(key == "name") {
+                    $( "li#templateHero span" ).attr( "data-id", mapid );
+                    $( "li#templateHero p#listHeroName" ).html(value);
+                    $( "li#templateHero p#listHeroType" ).html(value);
+                    $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
+                }
+            });
+        });
+        } else {
+        console.log("No data available");
+        }
+    })
+    .catch((error) => {
+        console.error("Error fetching data:", error);
+    });
+}
+
 // Form insert submission handler
 function insertList( db, form, path, list, input ) {
     const inputValue = document.getElementById(input).value;
@@ -150,4 +179,4 @@ formHero.addEventListener("submit", async (e) => {
     insertList2( database , "hero/", "heroName", "heroType" ); 
 });
 
-loadList( database , "hero/", "Hero" );
+loadList2( database , "hero/" );
