@@ -10,15 +10,15 @@
         <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="firebase.js"></script>
         <style>
             .material-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         </style>
     </head>
     <body>
@@ -65,9 +65,18 @@
                 </div>
             </header>
             <main class="mb-auto">
-                <div class="mx-auto py-6 sm:px-6 lg:px-8">
+                <div class="mx-auto py-6 px-8">
+                    <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6 hidden" role="alert">
+                        <strong class="font-bold"></strong>
+                        <span class="block sm:inline"></span>
+                        <span class="absolute top-0 bottom-0 right-0 px-4 py-3 text-slate-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" role="button" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 ">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </span>
+                    </div>
                     <div class="grid grid-cols-5 gap-6">
-                        <div>
+                        <div id="containerMap">
                             <form id="formMap">
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
@@ -82,48 +91,17 @@
                                 </div>           
                             </form>
                             <hr />
-                            <ul role="list" class="divide-y divide-gray-100 p-2">
-                                <li class="flex justify-between gap-x-2 py-2">
-                                  <div class="flex min-w-0 gap-x-4">
-                                    <div class="min-w-0 flex-auto">
-                                      <p class="text-sm/6 font-bold text-slate-900">Samoa</p>
-                                    </div>
-                                  </div>
-                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                  </div>
-                                </li>
-                                <li class="flex justify-between gap-x-2 py-2">
-                                    <div class="flex min-w-0 gap-x-4">
-                                      <div class="min-w-0 flex-auto">
-                                        <p class="text-sm/6 font-bold text-slate-900">Havana</p>
-                                      </div>
-                                    </div>
-                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                    </div>
-                                  </li>
-                                  <li class="flex justify-between gap-x-2 py-2">
-                                    <div class="flex min-w-0 gap-x-4">
-                                      <div class="min-w-0 flex-auto">
-                                        <p class="text-sm/6 font-bold text-slate-900">Suravasa</p>
-                                      </div>
-                                    </div>
-                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                        <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                    </div>
-                                </li>
-                            </ul>
+                            <ul role="listMap" id="listMap" class="divide-y divide-gray-100 p-2"></ul>
                         </div>
-                        <div>
-                            <form>
+                        <div id="containerHero">
+                            <form id="formHero">
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
                                             <label for="hero" class="block text-sm/6 font-bold text-gray-900">Hero</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
-                                                <input type="text" name="hero" id="hero" placeholder="Hero Name" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-                                                <select id="mode" name="mode" autocomplete="type" placeholder="Hero Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                                <input type="text" name="heroName" id="heroName" placeholder="Hero Name" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <select name="heroType" id="heroType" autocomplete="type" placeholder="Hero Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
                                                     <option>Tank</option>
                                                     <option>DPS</option>
                                                     <option>Support</option>
@@ -135,45 +113,16 @@
                                 </div>           
                             </form>
                             <hr />
-                            <ul role="list" class="divide-y divide-gray-100 p-2">
-                                <li class="flex justify-between gap-x-2 py-2">
-                                  <div class="flex min-w-0 gap-x-4">
-                                    <div class="min-w-0 flex-auto">
-                                      <p class="text-sm/6 font-bold text-slate-900">Juno</p>
-                                    </div>
-                                  </div>
-                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900 flex">Support <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                  </div>
-                                </li>
-                                <li class="flex justify-between gap-x-2 py-2">
-                                    <div class="flex min-w-0 gap-x-4">
-                                      <div class="min-w-0 flex-auto">
-                                        <p class="text-sm/6 font-bold text-slate-900">Ana</p>
-                                      </div>
-                                    </div>
-                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                        <p class="text-sm/6 text-gray-900 flex">Support <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                    </div>
-                                  </li>
-                                  <li class="flex justify-between gap-x-2 py-2">
-                                    <div class="flex min-w-0 gap-x-4">
-                                      <div class="min-w-0 flex-auto">
-                                        <p class="text-sm/6 font-bold text-slate-900">Winston</p>
-                                      </div>
-                                    </div>
-                                    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                        <p class="text-sm/6 text-gray-900 flex">Tank <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                    </div>
-                                </li>
+                            <ul role="listHero" class="divide-y divide-gray-100 p-2">
+                                
                             </ul>
                         </div>
-                        <div>
+                        <div id="containerPlayer">
                             <form>
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
-                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Players</label>
+                                            <label for="player" class="block text-sm/6 font-bold text-gray-900">Player</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
                                                 <input type="text" name="player" id="player" placeholder="Player Name" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                                 <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Player</button>                                           
@@ -216,12 +165,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <div>
+                        <div id="containerTag">
                             <form>
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
-                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Tags</label>
+                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Tag</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
                                                 <input type="text" name="tag" id="tag" placeholder="Tag" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                                 <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Player</button>                                           
@@ -264,14 +213,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <div>
+                        <div id="containerSetting">
                             <form>
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
-                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Settings</label>
+                                            <label for="setting" class="block text-sm/6 font-bold text-gray-900">Settings</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
-                                                <input type="text" name="hero" id="hero" placeholder="Setting" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <input type="text" name="setting" id="setting" placeholder="Setting" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                                 <select id="mode" name="mode" autocomplete="type" placeholder="Setting Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
                                                     <option>Season</option>
                                                     <option>Start Date</option>
@@ -317,8 +266,34 @@
                                 </li>
                             </ul>
                         </div>
+                        <ul id="template" role="list" class="hidden">
+                            <li id="templateMap" class="flex justify-between gap-x-2 py-2 hidden">
+                                <div class="flex min-w-0 gap-x-4">
+                                  <div class="min-w-0 flex-auto">
+                                    <p class="text-sm/6 font-bold text-slate-900" id="listMapName"></p>
+                                  </div>
+                                </div>
+                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                  <p class="text-sm/6 text-gray-900 flex">&nbsp; <span data-path="maps/" data-id="" class="listDelete ml-4 text-red-700 flex items-center hover:cursor-pointer hover:text-red-300"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                  </svg>
+                                  </span></p>
+                                </div>
+                            </li>
+                            <li id="templateHero" class="flex justify-between gap-x-2 py-2 hidden">
+                                <div class="flex min-w-0 gap-x-4">
+                                    <div class="min-w-0 flex-auto">
+                                        <p class="text-sm/6 font-bold text-slate-900" id="listHeroName"></p>
+                                    </div>
+                                </div>
+                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <p class="text-sm/6 text-gray-900 flex"><span id="listHeroType"></span> <span class="ml-4 text-red-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                    </svg></span></p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    
                 </div>
             </main>
             <footer class="bg-white rounded-lg m-4">
@@ -329,21 +304,10 @@
         </div>
         <script type="module">
             // Import the functions you need from the SDKs you need
-
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-            import {
-                getDatabase,
-                ref,
-                set,
-            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-            import {
-                getFirestore,
-                setLogLevel,
-            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-            setLogLevel("debug");
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-            // Your web app's Firebase configuration
+            import { getDatabase, ref, get, set, remove, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+            import { getFirestore, setLogLevel, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+            // Firebase configs
             const firebaseConfig = {
                 apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
                 authDomain: "fir-b6113.firebaseapp.com",
@@ -353,32 +317,145 @@
                 messagingSenderId: "975424791293",
                 appId: "1:975424791293:web:51703a22f18a8845c91494",
             };
-
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
-            // const db = getFirestore(app);
             const database = getDatabase();
+            
+            // Set notification alert
+            function setAlert( type, msg ) {
+                switch (type) {
+                    case "error":
+                        $("#alert").addClass("bg-red-100 border border-red-400 text-red-700");
+                        $("#alert strong").html("Error!");
+                        $("#alert span.block").html(msg);
+                        break;
+                    default:
+                        $("#alert").addClass("bg-green-100 border border-green-400 text-green-700");
+                        $("#alert strong").html("Success!");
+                        $("#alert span.block").html(msg);
+                }
+                $("#alert").removeClass("hidden");
+            }
+            
+            // Convert a string to an integer hash
+            function stringToIntHash( str ) {
+                let hash = 0;
+                if (str.length === 0) return hash;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i); // Get the Unicode value of the character
+                    hash = (hash << 5) - hash + char; // Bitwise operations: hash * 31 + char
+                    hash |= 0; // Convert to 32-bit integer
+                }
+                return Math.abs(hash);
+            }
 
-            // Form submission handler
-            const form = document.getElementById("formMap");
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const mapName = document.getElementById("mapName").value;
-
+            // Load list
+            function loadList( db, path, list ) {
+                const dbRef = ref(db, path);
+                $( "ul#list" + list ).html("");
+                get(dbRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    // Loop through the values
+                    Object.entries(data).forEach(([key, value]) => {
+                        var mapid = key;
+                        Object.entries(value).forEach(([key, value]) => {
+                            if(key == "name") {
+                                $( "li#template"+ list +" span" ).attr( "data-id", mapid );
+                                $( "li#template"+ list +" p#list"+ list +"Name" ).html(value);
+                                $( "li#template"+ list ).clone().appendTo( "ul#list" + list ).removeClass( "hidden" ).removeAttr('id');
+                            }
+                        });
+                    });
+                    } else {
+                    console.log("No data available");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching data:", error);
+                });
+            }
+            
+            // Form insert submission handler
+            function insertList( db, form, path, list, input ) {
+                const inputValue = document.getElementById(input).value;
+                var id = stringToIntHash(inputValue);
                 try {
-                // Save data to Firestore
-                set(ref(database, "maps/"), {
-                    name: mapName,
-                    timestamp: Date.now(),
+                    // Save data to Firestore
+                    set(ref(db, path + id), {
+                        name: inputValue,
+                        timestamp: Date.now(),
+                    });
+                } catch (error) {
+                    setAlert( "error", "Error saving text: " + error.message );
+                }
+                setAlert( "success", "Text saved successfully!" );
+                form.reset();
+                loadList( db, path, list );
+            }
+
+            function insertList2( db, path, input, type ) {
+                console.log("Insert Two");
+                const inputValue = document.getElementById(input).value;
+                const inputType = document.getElementById(type).value;
+                var id = stringToIntHash(inputValue);
+                console.log(id, inputValue, inputType);
+                try {
+                    // Save data to Firestore
+                    set(ref(db, path + id), {
+                        name: inputValue,
+                        type: inputType,
+                        timestamp: Date.now(),
+                    });
+                } catch (error) {
+                    setAlert( "error", "Error saving text: " + error.message );
+                }
+                setAlert( "success", "Text saved successfully!" );
+                form.reset();
+                loadList( db, path );
+            }
+
+            // Delete button handler
+            $(document).on("click", ".listDelete", function () { 
+                // Retrieve the data-path attribute from the clicked button
+                const id = $(this).attr("data-id");
+                const path = $(this).attr("data-path");
+
+                // Reference the Firebase node
+                const dbRef = ref(database, path + id);
+
+                // Delete the data
+                remove(dbRef)
+                .then(() => {
+                    setAlert( "success", "Data at deleted successfully!" );
+                })
+                .catch((error) => {
+                    setAlert( "error", error );
                 });
 
-                status.textContent = "Text saved successfully!";
-                form.reset();
-                } catch (error) {
-                status.textContent = "Error saving text: " + error.message;
-                }
+                loadList(database);
             });
+
+            // MAPS
+            // Form submission handler for map
+            const formMap = document.getElementById("formMap");
+            formMap.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                insertList( database , formMap, "maps/", "Map", "mapName" ); 
+            });
+
+            loadList( database , "maps/", "Map" );
+
+            // HERO
+            // Form submission handler for hero
+            const formHero = document.getElementById("formHero");
+            formHero.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                insertList2( database , "hero/", "heroName", "heroType" ); 
+            });
+
+            loadList( database , "hero/", "Hero" );
         </script>
     </body>
 </html>
