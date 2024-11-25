@@ -4,6 +4,7 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     onAuthStateChanged,
+    signOut,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,3 +38,13 @@ onAuthStateChanged(auth, (user) => {
         window.location.href("index.html");
     }   
 })
+const googleLogout = document.getElementById('googleLogout');
+googleLogout.addEventListener("click", function() {
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log("User signed out successfully");
+    }).catch((error) => {
+    // An error happened.
+    console.error("Error signing out:", error);
+    });
+});
