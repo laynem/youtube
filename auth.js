@@ -32,7 +32,7 @@ onAuthStateChanged(auth, (user) => {
         const userName = user.displayName;
         document.getElementById("userName").innerHTML = userName;
     } else {
-        window.location.href = "index.html";
+        // window.location.href = "index.html";
     }   
 })
 const googleLogout = document.getElementById('googleLogout');
