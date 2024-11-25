@@ -82,10 +82,10 @@ function loadListHero( db, path ) {
         const data = snapshot.val();
         // Loop through the values
         Object.entries(data).forEach(([key, value]) => {
-            var mapid = key;
+            var heroid = key;
             Object.entries(value).forEach(([key, value]) => {
                 if(key == "name") {
-                    $( "li#templateHero span" ).attr( "data-id", mapid );
+                    $( "li#templateHero span" ).attr( "data-id", heroid );
                     $( "li#templateHero p#listHeroName" ).html(value);
                     $( "li#templateHero p#listHeroType" ).html(value);
                     $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
@@ -119,7 +119,7 @@ function insertList( db, form, path, list, input ) {
     loadList( db, path, list );
 }
 
-function insertListHero( db, path, input, type ) {
+function insertListHero( db, form, path, input, type ) {
     console.log("Insert Two");
     const inputValue = document.getElementById(input).value;
     const inputType = document.getElementById(type).value;
@@ -176,7 +176,7 @@ loadList( database , "maps/", "Map" );
 const formHero = document.getElementById("formHero");
 formHero.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertListHero( database , "hero/", "heroName", "heroType" ); 
+    insertListHero( database , formHero, "hero/", "heroName", "heroType" ); 
 });
 
 loadListHero( database , "hero/" );
