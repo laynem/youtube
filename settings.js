@@ -180,3 +180,12 @@ formHero.addEventListener("submit", async (e) => {
 });
 
 loadListHero( database , "hero/" );
+
+// PLAYER
+const formPlayer = document.getElementById("formPlayer");
+formPlayer.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    insertList( database , formPlayer, "player/", "playerName" ); 
+});
+
+loadList( database , "player/", "Player" );
