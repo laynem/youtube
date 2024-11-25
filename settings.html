@@ -74,7 +74,7 @@
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
-                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Map</label>
+                                            <label for="map" class="block text-sm/6 font-bold text-gray-900">Map</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
                                                 <input type="text" name="mapName" id="mapName" placeholder="Map Name" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                                 <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Map</button>                                           
@@ -130,9 +130,9 @@
                                 <div class="p-4 border border-gray-200 rounded-lg shadow">
                                     <div class="grid grid-cols-12">
                                         <div class="col-span-12">
-                                            <label for="hero" class="block text-sm/6 font-bold text-gray-900">Tag</label>
+                                            <label for="tag" class="block text-sm/6 font-bold text-gray-900">Tag</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
-                                                <input type="text" name="tag" id="tag" placeholder="Tag" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <input type="text" name="tagName" id="tagName" placeholder="Tag" class="block col-span-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                                 <button type="submit" class="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add Player</button>                                           
                                             </div>                            
                                         </div>
@@ -140,18 +140,7 @@
                                 </div>           
                             </form>
                             <hr />
-                            <ul id="listTag" role="list" class="divide-y divide-gray-100 p-2">
-                                <li class="flex justify-between gap-x-2 py-2">
-                                  <div class="flex min-w-0 gap-x-4">
-                                    <div class="min-w-0 flex-auto">
-                                      <p class="text-sm/6 font-bold text-slate-900">Overwatch</p>
-                                    </div>
-                                  </div>
-                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                  </div>
-                                </li>
-                            </ul>
+                            <ul id="listTag" role="list" class="divide-y divide-gray-100 p-2"></ul>
                         </div>
                         <div id="containerSetting">
                             <form id="formSetting">
@@ -160,8 +149,8 @@
                                         <div class="col-span-12">
                                             <label for="setting" class="block text-sm/6 font-bold text-gray-900">Settings</label>
                                             <div class="grid grid-cols-3 gap-4 mt-1">
-                                                <input type="text" name="setting" id="setting" placeholder="Setting" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-                                                <select id="mode" name="mode" autocomplete="type" placeholder="Setting Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                                <input type="text" name="settingValue" id="settingValue" placeholder="Setting" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                                <select name="settingName" id="settingName" autocomplete="type" placeholder="Setting Type" class="block col-span-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
                                                     <option>Season</option>
                                                     <option>Start Date</option>
                                                     <option>End Date</option>
@@ -173,18 +162,7 @@
                                 </div>           
                             </form>
                             <hr />
-                            <ul id="listSetting" role="list" class="divide-y divide-gray-100 p-2">
-                                <li class="flex justify-between gap-x-2 py-2">
-                                  <div class="flex min-w-0 gap-x-4">
-                                    <div class="min-w-0 flex-auto">
-                                      <p class="text-sm/6 font-bold text-slate-900">Season</p>
-                                    </div>
-                                  </div>
-                                  <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900 flex">13 <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
-                                  </div>
-                                </li>
-                            </ul>
+                            <ul id="listSetting" role="list" class="divide-y divide-gray-100 p-2"></ul>
                         </div>
                         <ul id="template" role="list" class="hidden">
                             <li id="templateMap" class="flex justify-between gap-x-2 py-2 hidden">
@@ -210,9 +188,13 @@
                                     </div>
                                 </div>
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm/6 text-gray-900 flex"><span id="listHeroType"></span> <span class="ml-4 text-red-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                    </svg></span></p>
+                                    <p class="text-sm/6 text-gray-900 flex"><span id="listHeroType"></span> 
+                                        <span data-path="hero/" data-id="" class="listDelete ml-4 text-red-700 flex items-center hover:cursor-pointer hover:text-red-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </span>
+                                    </p>
                                 </div>
                             </li>
                             <li id="templatePlayer"  class="flex justify-between gap-x-2 py-2">
@@ -222,27 +204,45 @@
                                   </div>
                                 </div>
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                  <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; 
+                                        <span data-path="player/" data-id="" class="listDelete ml-4 text-red-700 flex items-center hover:cursor-pointer hover:text-red-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </span>
+                                    </p>
                                 </div>
                             </li>
                             <li id="templateTag" class="flex justify-between gap-x-2 py-2">
                                 <div class="flex min-w-0 gap-x-4">
                                   <div class="min-w-0 flex-auto">
-                                    <p class="text-sm/6 font-bold text-slate-900" id="listTagName">Overwatch</p>
+                                    <p class="text-sm/6 font-bold text-slate-900" id="listTagName"></p>
                                   </div>
                                 </div>
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                  <p class="text-sm/6 text-gray-900 flex">&nbsp; <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    <p class="text-sm/6 text-gray-900 flex">&nbsp; 
+                                        <span data-path="tag/" data-id="" class="listDelete ml-4 text-red-700 flex items-center hover:cursor-pointer hover:text-red-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </span>
+                                    </p>
                                 </div>
                               </li>
                             <li id="templateSetting" class="flex justify-between gap-x-2 py-2">
                                 <div class="flex min-w-0 gap-x-4">
                                   <div class="min-w-0 flex-auto">
-                                    <p class="text-sm/6 font-bold text-slate-900" id="listSettingName">Season</p>
+                                    <p class="text-sm/6 font-bold text-slate-900" id="listSettingName"></p>
                                   </div>
                                 </div>
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                  <p class="text-sm/6 text-gray-900 flex" id="listSettingValue"> <span class="ml-4 material-icons text-sm text-red-700">close</span></p>
+                                    <p class="text-sm/6 text-gray-900 flex"><span id="listSettingValue"></span> 
+                                        <span data-path="setting/" data-id="" class="listDelete ml-4 text-red-700 flex items-center hover:cursor-pointer hover:text-red-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </span>
+                                    </p>
                                 </div>
                             </li>
                         </ul>
