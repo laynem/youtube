@@ -46,50 +46,29 @@ function insertSchedule( db, form ) {
     form.reset();
 }
 
+// LOAD OPTIONS FOR MAP
 const inputMap = document.getElementById("inputMap");
 
-// Reference to the "items" node in the database
-const refMap = ref( database, "map" );
-
-// Fetch data and populate dropdown
-onValue(refMap, (snapshot) => {
-    console.log("Starting populating dropdown for map...", snapshot);
-    inputMap.innerHTML = '<option value="">Select an option</option>'; // Clear existing options
+const refMap = ref( database, "map/" );
+get(refMap)
+.then((snapshot) => {
+    if (snapshot.exists()) {
     const data = snapshot.val();
-    if (data) {
-        Object.keys(data).forEach((key) => {
-            const item = data[key]; // Access individual item
-            const option = document.createElement("option");
-            option.value = item.value; // Assuming each item has a 'value' property
-            option.textContent = item.name; // Assuming each item has a 'name' property
-            inputMap.appendChild(option);
-        });
-    }
-});
-
-// Load Options
-function loadOption( db, path ) {
-    const dbRef = ref(db, path);
-    $( "ul#listHero" ).html("");
-    get(dbRef)
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-        const data = snapshot.val();
-        // Loop through the values
-        Object.entries(data).forEach(([key, value]) => {
-            $( "li#templateHero span" ).attr( "data-id", heroid );
-            $( "li#templateHero p#listHeroName" ).html(value['name']);
-            $( "li#templateHero span#listHeroType" ).html(value['type']);
-            $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
-        });
-        } else {
-        console.log("No data available");
-        }
-    })
-    .catch((error) => {
-        console.error("Error fetching data:", error);
+    // Loop through the values
+    Object.entries(data).forEach(([key, value]) => {
+        const item = data[key]; // Access individual item
+        const option = document.createElement("option");
+        option.value = item.name; // Assuming each item has a 'value' property
+        option.textContent = item.name; // Assuming each item has a 'name' property
+        inputMap.appendChild(option);
     });
-}
+    } else {
+    console.log("No data available");
+    }
+})
+.catch((error) => {
+    console.error("Error fetching data:", error);
+});
 
 // SCHEDULE
 // Form submission handler for schedule
