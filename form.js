@@ -18,7 +18,7 @@ const database = getDatabase();
 
 // Form insert submission handler
 function insertSchedule( db, form ) {
-    const inputId = document.getElementById(inputId).value;
+    // const inputId = document.getElementById(inputId).value;
     const inputTitle = document.getElementById(inputTitle).value;
     const inputHero = document.getElementById(inputHero).value;
     const inputMap = document.getElementById(inputMap).value;
@@ -26,11 +26,11 @@ function insertSchedule( db, form ) {
     const inputFeaturing = document.getElementById(inputFeaturing).value;
     const inputDate = document.getElementById(inputDate).value;
     const inputCode = document.getElementById(inputCode).value;
-    var id = stringToIntHash(inputValue);
+    var id = stringToIntHash(inputDate);
     try {
         // Save data to Firestore
-        set(ref(db, path + id), {
-            id: inputId,
+        set(ref(db, "schedule/" + id), {
+            id: id,
             title: inputTitle,
             hero: inputHero,
             map: inputMap,
