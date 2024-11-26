@@ -53,6 +53,7 @@ const refMap = ref( database, "map" );
 
 // Fetch data and populate dropdown
 onValue(refMap, (snapshot) => {
+    console.log("Starting populating dropdown for map...");
     inputMap.innerHTML = '<option value="">Select an option</option>'; // Clear existing options
     const data = snapshot.val();
     if (data) {
