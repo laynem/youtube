@@ -12,7 +12,7 @@
 	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
         <link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/2.1.8/css/dataTables.tailwindcss.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
@@ -74,24 +74,36 @@
         </div>
         <script type="module" src="auth.js"></script>
         <script>
-            $(document).ready( function () {
-  var table = $('#example').DataTable({
-    ajax: {
-      url: 'https://fir-b6113-default-rtdb.firebaseio.com/hero.json',
-      dataSrc: function (obj) {
-        return Object.values(obj);
-      }
-    },
-    columns: [
-      {data: 'name', defaultContent: ''},
-      {data: 'Etc', defaultContent: ''},
-      {data: 'FinishPic', defaultContent: ''},
-      {data: 'ID', defaultContent: ''},
-      {data: 'Insert', defaultContent: ''},
-      {data: 'Maker', defaultContent: ''}
-    ]
-  });
-} );
+            fetch("https://fir-b6113-default-rtdb.firebaseio.com/hero.json")
+            .then(response => response.json())
+            .then(data => {
+                // Convert JSON data to an array for DataTables
+                const tableData = Object.keys(data).map(key => {
+                    const hero = data[key];
+                    return [hero.name, hero.type, hero.timestamp];
+                });
+
+                // Initialize the DataTable
+                const table = new DataTable("#example", {
+                    ordering: false,
+                    paging: false,
+                    searching: false,
+                    data: tableData,
+                    columns: [
+                        { title: "#" },
+                        { title: "Title" },
+                        { title: "Hero" },
+                        { title: "Hero Type" },
+                        { title: "Map" },
+                        { title: "Mode" },
+                        { title: "Featuring" },
+                        { title: "Date" },
+                        { title: "Code" },
+                        { title: "Release Date" }
+                    ]
+                });
+            })
+            .catch(error => console.error('Error fetching JSON data:', error));
         </script>
     </body>
 </html>
