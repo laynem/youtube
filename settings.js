@@ -84,12 +84,14 @@ function loadListHero( db, path ) {
         Object.entries(data).forEach(([key, value]) => {
             var heroid = key;
             Object.entries(value).forEach(([key, value]) => {
+                $( "li#templateHero span" ).attr( "data-id", heroid );
                 if(key == "name") {
-                    $( "li#templateHero span" ).attr( "data-id", heroid );
                     $( "li#templateHero p#listHeroName" ).html(value);
-                    $( "li#templateHero p#listHeroType" ).html(value);
-                    $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
                 }
+                if(key == "type") {
+                    $( "li#templateHero p#listHeroType" ).html(value);
+                }
+                $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
             });
         });
         } else {
@@ -113,12 +115,14 @@ function loadListSetting( db, path ) {
         Object.entries(data).forEach(([key, value]) => {
             var heroid = key;
             Object.entries(value).forEach(([key, value]) => {
+                $( "li#templateSetting span" ).attr( "data-id", heroid );
                 if(key == "name") {
-                    $( "li#templateSetting span" ).attr( "data-id", heroid );
                     $( "li#templateSetting p#listSettingName" ).html(value);
-                    $( "li#templateSetting p#listSettingType" ).html(value);
-                    $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
                 }
+                if(key == "value") {
+                    $( "li#templateSetting p#listSettingValue" ).html(value);
+                }
+                $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
             });
         });
         } else {
@@ -172,7 +176,7 @@ function insertListHero( db, form, path, input, type ) {
 function insertListSetting( db, form, path, name, value ) {
     const inputName = document.getElementById(name).value;
     const inputValue = document.getElementById(value).value;
-    var id = stringToIntHash(inputValue);
+    var id = stringToIntHash(inputName);
     try {
         // Save data to Firestore
         set(ref(db, path + id), {
