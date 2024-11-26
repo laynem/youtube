@@ -49,7 +49,7 @@ function insertSchedule( db, form ) {
 const inputMap = document.getElementById("inputMap");
 
 // Reference to the "items" node in the database
-const refMap = ref( database, "map/" );
+const refMap = ref( database, "map" );
 
 // Fetch data and populate dropdown
 onValue(refMap, (snapshot) => {
