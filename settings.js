@@ -16,10 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
-const heroRef = collection(database, "hero");
-const q = query(heroRef, orderBy("name"), limit(3));
-console.log(q);
-
 // Set notification alert
 function setAlert( type, msg ) {
     switch (type) {
