@@ -82,6 +82,7 @@ function loadListHero( db, path ) {
         const data = snapshot.val();
         // Loop through the values
         Object.entries(data).forEach(([key, value]) => {
+            console.log(key, value)
             var heroid = key;
             Object.entries(value).forEach(([key, value]) => {
                 $( "li#templateHero span" ).attr( "data-id", heroid );
