@@ -19,13 +19,13 @@ const database = getDatabase();
 // Form insert submission handler
 function insertSchedule( db, form ) {
     // const inputId = document.getElementById(inputId).value;
-    const inputTitle = document.getElementById(inputTitle).value;
-    const inputHero = document.getElementById(inputHero).value;
-    const inputMap = document.getElementById(inputMap).value;
-    const inputMode = document.getElementById(inputMode).value;
-    const inputFeaturing = document.getElementById(inputFeaturing).value;
-    const inputDate = document.getElementById(inputDate).value;
-    const inputCode = document.getElementById(inputCode).value;
+    const inputTitle = document.getElementById("inputTitle").value;
+    const inputHero = document.getElementById("inputHero").value;
+    const inputMap = document.getElementById("inputMap").value;
+    const inputMode = document.getElementById("inputMode").value;
+    const inputFeaturing = document.getElementById("inputFeaturing").value;
+    const inputDate = document.getElementById("inputDate").value;
+    const inputCode = document.getElementById("inputCode").value;
     var id = stringToIntHash(inputDate);
     try {
         // Save data to Firestore
