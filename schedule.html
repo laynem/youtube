@@ -12,6 +12,9 @@
 	    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+        <link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/2.1.8/css/dataTables.tailwindcss.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
@@ -58,6 +61,24 @@
                 </div>
             </header>
             <main class="mb-auto">
+                <div class="mx-auto px-8">
+                    <table id="example" class="display dataTable" style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>1301</td>
+                                <td>Patch Notes Are Important</td>
+                                <td>Ana</td>
+                                <td>Support</td>
+                                <td>Samoa</td>
+                                <td>Quick Play</td>
+                                <td>Vballpuppy, Thatlilqt, D4rchangel & Abuton</td>
+                                <td>10/15/2024</td>
+                                <td>SF5EHX</td>
+                                <td>10/15/2024</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </main>
             <footer class="bg-white rounded-lg m-4">
                 <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
@@ -67,5 +88,30 @@
             </footer>
         </div>
         <script type="module" src="auth.js"></script>
+        <script>
+            new DataTable('#example', {
+                ordering: false,
+                searching: false,
+                paging: false,
+                ajax: {
+                    url: 'https://fir-b6113-default-rtdb.firebaseio.com/hero.json',
+                    dataSrc: function (obj) {
+                        return Object.values(obj);
+                    }
+                },
+                columns: [
+                    {"title" : "#" , data: 'id'},
+                    {"title" : "Title" , data: 'title'},
+                    {"title" : "Hero" , data: 'name' },
+                    {"title" : "Hero Type" , data: 'type'},
+                    {"title" : "Map" , data: 'map'},
+                    {"title" : "Mode" , data: 'mode' },
+                    {"title" : "Featuring" , data: 'feat' },
+                    {"title" : "Date" , data: 'recorded' },
+                    {"title" : "Code" , data: 'code' },
+                    {"title" : "Release Date" , data: 'release' }
+                ] 
+            });
+        </script>
     </body>
 </html>

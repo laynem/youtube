@@ -118,3 +118,10 @@ ul#listSetting {
     height: 55vh;
     overflow-y: scroll;
 }
+
+/* SCHEDULE */
+
+/* DataTables */
+div.dt-container div.dt-layout-row {
+    margin: .25em 0;
+}
