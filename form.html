@@ -59,7 +59,7 @@
             </header>
             <main class="mb-auto">
                 <div class="mx-auto py-6 sm:px-6 lg:px-8">
-                    <form>
+                    <form id="formSchedule">
                         <div class="pb-10 border-b border-gray-900/10">
                             <div class="grid grid-cols-12 gap-x-6 gap-y-8">
                                 <div class="col-span-2">
@@ -71,27 +71,23 @@
                                 <div class="col-span-1">
                                     <label for="hero" class="block text-sm/6 font-bold text-gray-900">Hero</label>
                                     <div class="mt-1">
-                                        <select id="hero" name="hero" autocomplete="hero-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
-                                            <option>United States</option>
-                                            <option>Canada</option>
-                                            <option>Mexico</option>
+                                        <select id="inputHero" name="inputHero" autocomplete="hero-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                            <option>Select An Option</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-span-2">
                                     <label for="map" class="block text-sm/6 font-bold text-gray-900">Map</label>
                                     <div class="mt-1">
-                                        <select id="map" name="map" autocomplete="map-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
-                                            <option>United States</option>
-                                            <option>Canada</option>
-                                            <option>Mexico</option>
+                                        <select id="inputMap" name="inputMap" autocomplete="map-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                            <option>Select An Option</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-span-1">
                                     <label for="mode" class="block text-sm/6 font-bold text-gray-900">Mode</label>
                                     <div class="mt-1">
-                                        <select id="mode" name="mode" autocomplete="mode-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
+                                        <select id="inputMode" name="inputMode" autocomplete="mode-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6">
                                             <option>Quick Play</option>
                                             <option>Competitive</option>
                                         </select>
@@ -100,21 +96,21 @@
                                 <div class="col-span-2">
                                     <label for="featuring" class="block text-sm/6 font-bold text-gray-900">Featuring</label>
                                     <div class="mt-1">
-                                        <input type="text" name="featuring" id="featuring" autocomplete="featuring" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                        <input type="text" id="inputFeaturing" name="inputFeaturing" autocomplete="featuring" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                     </div>
                                 </div>
                                 <div class="col-span-2">
                                     <label for="date" class="block text-sm/6 font-bold text-gray-900">Date</label>
                                     <div class="mt-1">
                                         <div class="relative max-w-sm">
-                                            <input datepicker id="default-datepicker" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" placeholder="Select date">
+                                            <input datepicker id="inputDate" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" placeholder="Select date">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-span-1">
                                     <label for="code" class="block text-sm/6 font-bold text-gray-900">Code</label>
                                     <div class="mt-1">
-                                        <input type="text" name="code" id="code" autocomplete="code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                        <input type="text" id="inputCode" name="inputCode" autocomplete="code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                                     </div>
                                 </div>
                             </div>
@@ -133,60 +129,7 @@
                 </div>
             </footer>
         </div>
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-            import {
-                getDatabase,
-                ref,
-                set,
-            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-            import {
-                getFirestore,
-                setLogLevel,
-            } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-            setLogLevel("debug");
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
-                authDomain: "fir-b6113.firebaseapp.com",
-                databaseURL: "https://fir-b6113-default-rtdb.firebaseio.com",
-                projectId: "fir-b6113",
-                storageBucket: "fir-b6113.firebasestorage.app",
-                messagingSenderId: "975424791293",
-                appId: "1:975424791293:web:51703a22f18a8845c91494",
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            // const db = getFirestore(app);
-            const database = getDatabase();
-
-            // Form submission handler
-            const form = document.getElementById("textForm");
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const textInput = document.getElementById("textInput").value;
-                const status = document.getElementById("status");
-
-                try {
-                // Save data to Firestore
-                set(ref(database, "users/" + 1), {
-                    username: textInput,
-                    email: textInput,
-                    profile_picture: textInput,
-                });
-
-                status.textContent = "Text saved successfully!";
-                form.reset();
-                } catch (error) {
-                status.textContent = "Error saving text: " + error.message;
-                }
-            });
-        </script>
+        <script type="module" src="auth.js"></script>
+        <script type="module" src="form.js"></script>
     </body>
 </html>
