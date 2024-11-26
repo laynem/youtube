@@ -93,7 +93,7 @@ get(refHero)
 });
 
 // LOAD OPTIONS FOR MAP
-const inputPlayer = document.getElementById("inputPlayer");
+const inputFeaturing = document.getElementById("inputFeaturing");
 const refPlayer = ref( database, "player/" );
 get(refPlayer)
 .then((snapshot) => {
@@ -105,7 +105,7 @@ get(refPlayer)
             const option = document.createElement("option");
             option.value = item.name; // Assuming each item has a 'value' property
             option.textContent = item.name; // Assuming each item has a 'name' property
-            inputPlayer.appendChild(option);
+            inputFeaturing.appendChild(option);
         });
     } else {
         console.log("No data available");
