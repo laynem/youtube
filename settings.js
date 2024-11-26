@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getDatabase, ref, get, set, remove, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-import { getFirestore, setLogLevel, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, setLogLevel, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 // Firebase configs
 const firebaseConfig = {
     apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
@@ -15,6 +15,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
+
+const heroRef = ref(database, "hero/");
+const q = query(heroRef, orderBy("name"), limit(3));
+console.log(q);
 
 // Set notification alert
 function setAlert( type, msg ) {
