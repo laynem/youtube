@@ -82,7 +82,7 @@ get(refHero)
             const option = document.createElement("option");
             option.value = item.name; // Assuming each item has a 'value' property
             option.textContent = item.name; // Assuming each item has a 'name' property
-            inputMap.appendChild(option);
+            inputHero.appendChild(option);
         });
     } else {
         console.log("No data available");
@@ -105,7 +105,7 @@ get(refPlayer)
             const option = document.createElement("option");
             option.value = item.name; // Assuming each item has a 'value' property
             option.textContent = item.name; // Assuming each item has a 'name' property
-            inputMap.appendChild(option);
+            inputPlayer.appendChild(option);
         });
     } else {
         console.log("No data available");
