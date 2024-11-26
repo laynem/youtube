@@ -84,14 +84,10 @@ function loadListHero( db, path ) {
         Object.entries(data).forEach(([key, value]) => {
             console.log(key, value)
             var heroid = key;
-            Object.entries(value).forEach(([key, value]) => {
-                if(key == "name") {
-                    $( "li#templateHero span" ).attr( "data-id", heroid );
-                    $( "li#templateHero p#listHeroName" ).html(value['name']);
-                    $( "li#templateHero p#listHeroType" ).html(value['type']);
-                    $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
-                }
-            });
+            $( "li#templateHero span" ).attr( "data-id", heroid );
+            $( "li#templateHero p#listHeroName" ).html(value['name']);
+            $( "li#templateHero p#listHeroType" ).html(value['type']);
+            $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
         });
         } else {
         console.log("No data available");
