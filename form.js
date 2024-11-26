@@ -78,3 +78,5 @@ formSchedule.addEventListener("submit", async (e) => {
     e.preventDefault();
     insertSchedule( database , formSchedule ); 
 });
+
+$("#inputMap").select2();
