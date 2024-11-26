@@ -49,7 +49,7 @@ function insertSchedule( db, form ) {
 // LOAD OPTIONS FOR MAP
 const inputMap = document.getElementById("inputMap");
 
-const refMap = ref( database, "map/" );
+const refMap = ref( database, "maps/" );
 get(refMap)
 .then((snapshot) => {
     if (snapshot.exists()) {
