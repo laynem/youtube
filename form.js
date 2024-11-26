@@ -53,17 +53,18 @@ const refMap = ref( database, "map/" );
 get(refMap)
 .then((snapshot) => {
     if (snapshot.exists()) {
-    const data = snapshot.val();
-    // Loop through the values
-    Object.entries(data).forEach(([key, value]) => {
-        const item = data[key]; // Access individual item
-        const option = document.createElement("option");
-        option.value = item.name; // Assuming each item has a 'value' property
-        option.textContent = item.name; // Assuming each item has a 'name' property
-        inputMap.appendChild(option);
-    });
+        const data = snapshot.val();
+        console.log("data: ", data);
+        // Loop through the values
+        Object.entries(data).forEach(([key, value]) => {
+            const item = data[key]; // Access individual item
+            const option = document.createElement("option");
+            option.value = item.name; // Assuming each item has a 'value' property
+            option.textContent = item.name; // Assuming each item has a 'name' property
+            inputMap.appendChild(option);
+        });
     } else {
-    console.log("No data available");
+        console.log("No data available");
     }
 })
 .catch((error) => {
