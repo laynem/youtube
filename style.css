@@ -110,7 +110,11 @@
 }
 
 /* SETTINGS */
-ul#listMap {
+ul#listMap, 
+ul#listHero,
+ul#listPlayer,
+ul#listTag,
+ul#listSetting {
     height: 55vh;
     overflow-y: scroll;
 }
