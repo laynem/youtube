@@ -111,6 +111,6 @@
 
 /* SETTINGS */
 ul#listMap {
-    height: 300px;
-    overflow-y: scroll; 
+    height: 55vh;
+    overflow-y: scroll;
 }
