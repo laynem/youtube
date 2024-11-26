@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getDatabase, ref, get, set, remove, onValue  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { getDatabase, ref, get, set, remove, query, orderByChild, equalTo, get  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { getFirestore, setLogLevel, collection, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 // Firebase configs
 const firebaseConfig = {
@@ -58,6 +58,32 @@ function insertSchedule( db, form ) {
     }
     form.reset();
 }
+
+// COUNT THE AMOUNT OF SCHEDULES
+async function findRecordByName(name) {
+    console.log("find record by name...");
+    const scheduleRef = ref(database, "schedule/"); // 'Schedule' is your container
+    const q = query(scheduleRef, orderByChild("title"), equalTo(name));
+
+    try {
+      const snapshot = await get(q);
+      if (!snapshot.exists()) {
+        console.log("No matching records found!");
+        return null;
+      }
+
+      console.log(snapshot);
+  
+      snapshot.forEach(childSnapshot => {
+        console.log(childSnapshot.key, "=>", childSnapshot.val());
+      });
+    } catch (error) {
+      console.error("Error fetching record: ", error);
+    }
+  }
+  
+  // Example usage
+  findRecordByName("test");
 
 // LOAD OPTIONS FOR MAP
 const inputMap = document.getElementById("inputMap");
