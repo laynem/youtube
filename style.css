@@ -108,3 +108,9 @@
     align-items: center;
     justify-content: center;
 }
+
+/* SETTINGS */
+ul#listMap {
+    height: 300px;
+    overflow-y: scroll; 
+}
