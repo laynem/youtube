@@ -115,7 +115,7 @@ function loadListSetting( db, path ) {
                     $( "li#templateSetting p#listSettingName" ).html(value);
                 }
                 if(key == "value") {
-                    $( "li#templateSetting p#listSettingValue" ).html(value);
+                    $( "li#templateSetting span#listSettingValue" ).html(value);
                 }
                 $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
             });
