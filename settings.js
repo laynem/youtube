@@ -85,14 +85,12 @@ function loadListHero( db, path ) {
             console.log(key, value)
             var heroid = key;
             Object.entries(value).forEach(([key, value]) => {
-                $( "li#templateHero span" ).attr( "data-id", heroid );
                 if(key == "name") {
-                    $( "li#templateHero p#listHeroName" ).html(value);
+                    $( "li#templateHero span" ).attr( "data-id", heroid );
+                    $( "li#templateHero p#listHeroName" ).html(value.name);
+                    $( "li#templateHero p#listHeroType" ).html(value.type);
+                    $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
                 }
-                if(key == "type") {
-                    $( "li#templateHero p#listHeroType" ).html(value);
-                }
-                $( "li#templateHero" ).clone().appendTo( "ul#listHero" ).removeClass( "hidden" ).removeAttr('id');
             });
         });
         } else {
