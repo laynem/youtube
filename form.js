@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getDatabase, ref, get, set, remove, query, orderByChild, equalTo  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-import { getFirestore, setLogLevel, collection, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, setLogLevel, collection, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 // Firebase configs
 const firebaseConfig = {
     apiKey: "AIzaSyDG2yH066S224ShC8PN27uv0eQYfNPwMa4",
