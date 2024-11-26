@@ -16,6 +16,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
+// Convert a string to an integer hash
+function stringToIntHash( str ) {
+    let hash = 0;
+    if (str.length === 0) return hash;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i); // Get the Unicode value of the character
+        hash = (hash << 5) - hash + char; // Bitwise operations: hash * 31 + char
+        hash |= 0; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+}
+
+
 // Form insert submission handler
 function insertSchedule( db, form ) {
     // const inputId = document.getElementById(inputId).value;
