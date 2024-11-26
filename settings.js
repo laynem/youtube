@@ -109,16 +109,10 @@ function loadListSetting( db, path ) {
         // Loop through the values
         Object.entries(data).forEach(([key, value]) => {
             var heroid = key;
-            Object.entries(value).forEach(([key, value]) => {
-                $( "li#templateSetting span" ).attr( "data-id", heroid );
-                if(key == "name") {
-                    $( "li#templateSetting p#listSettingName" ).html(value);
-                }
-                if(key == "value") {
-                    $( "li#templateSetting span#listSettingValue" ).html(value);
-                }
-                $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
-            });
+            $( "li#templateSetting span" ).attr( "data-id", heroid );
+            $( "li#templateSetting p#listSettingName" ).html(value['name']);
+            $( "li#templateSetting span#listSettingValue" ).html(value['value']);
+            $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
         });
         } else {
         console.log("No data available");
