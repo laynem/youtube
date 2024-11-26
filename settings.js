@@ -169,15 +169,15 @@ function insertListHero( db, form, path, input, type ) {
 }
 
 // Form insert submission handler
-function insertListSetting( db, form, path, input, type ) {
-    const inputValue = document.getElementById(input).value;
-    const inputType = document.getElementById(type).value;
+function insertListSetting( db, form, path, name, value ) {
+    const inputName = document.getElementById(name).value;
+    const inputValue = document.getElementById(value).value;
     var id = stringToIntHash(inputValue);
     try {
         // Save data to Firestore
         set(ref(db, path + id), {
-            name: inputValue,
-            type: inputType,
+            name: inputName,
+            value: inputValue,
             timestamp: Date.now(),
         });
     } catch (error) {
@@ -244,7 +244,7 @@ loadList( database , "player/", "Player" );
 const formTag = document.getElementById("formTag");
 formTag.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertList( database , formPlayer, "tag/", "Tag", "playerTag" ); 
+    insertList( database , formTag, "tag/", "Tag", "tagName" ); 
 });
 
 loadList( database , "tag/", "Tag" );
@@ -254,7 +254,7 @@ loadList( database , "tag/", "Tag" );
 const formSetting = document.getElementById("formSetting");
 formSetting.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertListSetting( database , formSetting, "setting/", "Setting", "playerSetting" ); 
+    insertListSetting( database , formSetting, "setting/", "settingName", "settingValue" ); 
 });
 
 loadListSetting( database , "setting/", "Setting" );
