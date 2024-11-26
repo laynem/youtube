@@ -101,6 +101,35 @@ function loadListHero( db, path ) {
     });
 }
 
+// Load list Setting
+function loadListSetting( db, path ) {
+    const dbRef = ref(db, path);
+    $( "ul#listSetting" ).html("");
+    get(dbRef)
+    .then((snapshot) => {
+        if (snapshot.exists()) {
+        const data = snapshot.val();
+        // Loop through the values
+        Object.entries(data).forEach(([key, value]) => {
+            var heroid = key;
+            Object.entries(value).forEach(([key, value]) => {
+                if(key == "name") {
+                    $( "li#templateSetting span" ).attr( "data-id", heroid );
+                    $( "li#templateSetting p#listSettingName" ).html(value);
+                    $( "li#templateSetting p#listSettingType" ).html(value);
+                    $( "li#templateSetting" ).clone().appendTo( "ul#listSetting" ).removeClass( "hidden" ).removeAttr('id');
+                }
+            });
+        });
+        } else {
+        console.log("No data available");
+        }
+    })
+    .catch((error) => {
+        console.error("Error fetching data:", error);
+    });
+}
+
 // Form insert submission handler
 function insertList( db, form, path, list, input ) {
     const inputValue = document.getElementById(input).value;
@@ -119,12 +148,11 @@ function insertList( db, form, path, list, input ) {
     loadList( db, path, list );
 }
 
+// Form insert submission handler
 function insertListHero( db, form, path, input, type ) {
-    console.log("Insert Two");
     const inputValue = document.getElementById(input).value;
     const inputType = document.getElementById(type).value;
     var id = stringToIntHash(inputValue);
-    console.log(id, inputValue, inputType);
     try {
         // Save data to Firestore
         set(ref(db, path + id), {
@@ -138,6 +166,26 @@ function insertListHero( db, form, path, input, type ) {
     setAlert( "success", "Text saved successfully!" );
     form.reset();
     loadListHero( db, path );
+}
+
+// Form insert submission handler
+function insertListSetting( db, form, path, input, type ) {
+    const inputValue = document.getElementById(input).value;
+    const inputType = document.getElementById(type).value;
+    var id = stringToIntHash(inputValue);
+    try {
+        // Save data to Firestore
+        set(ref(db, path + id), {
+            name: inputValue,
+            type: inputType,
+            timestamp: Date.now(),
+        });
+    } catch (error) {
+        setAlert( "error", "Error saving text: " + error.message );
+    }
+    setAlert( "success", "Text saved successfully!" );
+    form.reset();
+    loadListSetting( db, path );
 }
 
 // Delete button handler
@@ -182,10 +230,31 @@ formHero.addEventListener("submit", async (e) => {
 loadListHero( database , "hero/" );
 
 // PLAYER
+// Form submission handler for player
 const formPlayer = document.getElementById("formPlayer");
 formPlayer.addEventListener("submit", async (e) => {
     e.preventDefault();
-    insertList( database , formPlayer, "player/", "Player","playerName" ); 
+    insertList( database , formPlayer, "player/", "Player", "playerName" ); 
 });
 
 loadList( database , "player/", "Player" );
+
+// TAG
+// Form submission handler for tag
+const formTag = document.getElementById("formTag");
+formTag.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    insertList( database , formPlayer, "tag/", "Tag", "playerTag" ); 
+});
+
+loadList( database , "tag/", "Tag" );
+
+// SETTING
+// Form submission handler for setting
+const formSetting = document.getElementById("formSetting");
+formSetting.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    insertListSetting( database , formSetting, "setting/", "Setting", "playerSetting" ); 
+});
+
+loadListSetting( database , "setting/", "Setting" );
